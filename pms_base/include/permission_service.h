@@ -28,11 +28,10 @@ extern "C" {
 #define PERMISSION_SERVICE "permissionms"
 #endif
 
-typedef struct PermissionService PermissionService;
-struct PermissionService {
+typedef struct {
     INHERIT_SERVICE;
     Identity identity;
-};
+} PermissionService;
 
 #ifdef __cplusplus
 #if __cplusplus
