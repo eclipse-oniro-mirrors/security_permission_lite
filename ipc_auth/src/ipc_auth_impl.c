@@ -50,16 +50,12 @@ static int IsUidValid(unsigned int uid)
 #ifdef OHOS_APPFWK_ENABLE
 static int GetUidByBundleName(const char *bundleName, unsigned int *uid)
 {
-    BundleInfo *bundleInfo = NULL;
-    if (GetBundleInfo(bundleName, 0, bundleInfo) != 0) {
+    BundleInfo bundleInfo = {};
+    if (GetBundleInfo(bundleName, 0, &bundleInfo) != 0) {
         HILOG_ERROR(HILOG_MODULE_APP, "Invalid bundleName, [name: %s][line: %d]", bundleName, __LINE__);
         return AUTH_ERRORCODE_INVALID_BUNDLENAME;
     }
-    if (bundleInfo == NULL) {
-        HILOG_ERROR(HILOG_MODULE_APP, "Get bundleInfo error, [name: %s][line: %d]", bundleName, __LINE__);
-        return AUTH_ERRORCODE_GET_BUNDLEINFO_ERROR;
-    }
-    *uid = bundleInfo->uid;
+    *uid = bundleInfo.uid;
     return AUTH_ERRORCODE_SUCCESS;
 }
 #endif
@@ -85,7 +81,7 @@ static void SetPolicy(IpcPolicy policy, PolicyTrans *policyTrans)
             break;
         case FIXED:
             policyTrans->type = FIXED;
-            for (int m = 0; m < POLICY_SIZE; m++) {
+            for (int m = 0; m < UID_SIZE; m++) {
                 policyTrans->fixedUid[m] = policy.fixedUid[m];
             }
             break;
