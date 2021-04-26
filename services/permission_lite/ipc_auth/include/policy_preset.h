@@ -216,6 +216,19 @@ FeaturePolicy PowerFeature[] = {
         }
     },
 };
+
+FeaturePolicy timertaskFeature[] = {
+    {
+        "timertask_fea",
+        {
+            {
+                .type=RANGE,
+                .uidMin=0,
+                .uidMax=999,
+            },
+        },
+    },
+};
 static PolicySetting g_presetPolicies[] = {
     {"permissionms", pmsFeature, 2},
     {"abilityms", amsFeature, 2},
@@ -228,7 +241,8 @@ static PolicySetting g_presetPolicies[] = {
     {"bundle_daemon", bdsFeature, 1},
     {"sensor_service", sensorFeature, 1},
     {"ai_service", aiFeature, 1},
-    {"power_service", PowerFeature, 1}
+    {"power_service", PowerFeature, 1},
+    {"timertask_srv", timertaskFeature, 1}
 };
 
 static int g_presetPolicySize = sizeof(g_presetPolicies) / sizeof(PolicySetting);
